@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Coração 3D</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Three.js + Loader (versão antiga estável) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+        // Cena, câmera e renderizador
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+        );
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Luzes
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(2, 2, 5);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0x404040, 1));
+
+        // Controles para girar/zoom
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+        // Loader do coração 3D
+        const loader = new THREE.GLTFLoader();
+        loader.load(
+            "heart.glb", // coloque o arquivo "heart.glb" na mesma pasta
+            function (gltf) {
+                const model = gltf.scene;
+                model.scale.set(0.02, 0.02, 0.02); // ajusta tamanho
+                scene.add(model);
+
+                // animação leve para pulsar
+                let scaleUp = true;
+                function pulse() {
+                    requestAnimationFrame(pulse);
+                    let s = model.scale.x;
+                    if (scaleUp) {
+                        s += 0.0005;
+                        if (s > 0.022) scaleUp = false;
+                    } else {
+                        s -= 0.0005;
+                        if (s < 0.018) scaleUp = true;
+                    }
+                    model.scale.set(s, s, s);
+                }
+                pulse();
+            },
+            undefined,
+            function (error) {
+                console.error("Erro ao carregar o modelo:", error);
+            }
+        );
+
+        // Posição da câmera
+        camera.position.z = 3;
+
+        // Loop de renderização
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Responsividade
+        window.addEventListener("resize", () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+
+</html>

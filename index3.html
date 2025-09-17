@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contração Cardíaca — Sístole (Explainer)</title>
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --accent: #ef6c35;
+            --muted: #9aa4b2;
+            --glass: rgba(255, 255, 255, 0.04);
+            --success: #2eb872
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+            color: #e6eef6;
+            background: linear-gradient(180deg, #071028 0%, #071a2b 100%);
+            -webkit-font-smoothing: antialiased
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), transparent);
+            backdrop-filter: blur(6px)
+        }
+
+        header h1 {
+            font-size: 18px;
+            margin: 0;
+            color: #fff
+        }
+
+        nav a {
+            color: var(--muted);
+            margin-left: 14px;
+            text-decoration: none;
+            font-size: 14px
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 22px auto;
+            padding: 18px
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
+            margin-bottom: 18px
+        }
+
+        h2 {
+            margin: 0 0 8px 0
+        }
+
+        .step-desc {
+            color: var(--muted);
+            font-size: 15px
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 18px
+        }
+
+        @media(max-width:980px) {
+            .layout {
+                grid-template-columns: 1fr
+            }
+
+            .aside {
+                order: 2
+            }
+        }
+
+        /* Heart SVG container */
+        .heart-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px
+        }
+
+        svg#heart {
+            width: 100%;
+            max-width: 520px;
+            height: auto
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer
+        }
+
+        button.primary {
+            background: var(--accent);
+            border-color: transparent
+        }
+
+        /* highlights */
+        .label-bubble {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        /* ECG */
+        .ecg {
+            height: 80px;
+            width: 100%;
+            display: block
+        }
+
+        /* Quiz */
+        .quiz-item {
+            margin-bottom: 14px
+        }
+
+        .option {
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            margin-top: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            cursor: pointer;
+            color: #fff
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background: rgba(46, 184, 114, 0.08)
+        }
+
+        .option.wrong {
+            border-color: #ef5454;
+            background: rgba(239, 84, 84, 0.06)
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 10px
+        }
+
+        .score {
+            font-weight: 700
+        }
+
+        footer {
+            color: var(--muted);
+            text-align: center;
+            padding: 18px 0;
+            margin-top: 18px
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Contração Cardíaca — Sístole</h1>
+        <nav>
+            <a href="#introducao">Introdução</a>
+            <a href="#anatomia">Anatomia</a>
+            <a href="#sistole">Sístole</a>
+            <a href="#quiz">Quiz</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="introducao" class="card">
+            <h2>Introdução</h2>
+            <p class="step-desc">Este módulo interativo explica passo a passo como acontece a sístole — desde o disparo
+                elétrico até a ejeção ventricular. Interaja com o coração (SVG criado do zero), veja animações de
+                contração e ao final faça o quiz com feedback e pontuação.</p>
+        </section>
+
+        <div class="layout">
+            <div>
+                <section id="anatomia" class="card">
+                    <h2>Anatomia (clique nas áreas)</h2>
+                    <p class="step-desc">SVG vetorial desenhado do zero. As partes são clicáveis: ao selecionar, aparece
+                        uma explicação e a área "se contrai" para simular a sístole.</p>
+
+                    <div class="heart-wrap">
+                        <!-- SVG heart drawn from paths with gradients and groups for interactivity -->
+                        <svg id="heart" viewBox="0 0 420 420" role="img" aria-label="Coração humano estilizado">
+                            <defs>
+                                <linearGradient id="g1" x1="0" x2="1">
+                                    <stop offset="0%" stop-color="#ff7a59" />
+                                    <stop offset="100%" stop-color="#c63a2d" />
+                                </linearGradient>
+                                <linearGradient id="g2" x1="0" x2="1">
+                                    <stop offset="0%" stop-color="#ffad9b" />
+                                    <stop offset="100%" stop-color="#ff6b4a" />
+                                </linearGradient>
+                                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur stdDeviation="8" result="blur" />
+                                    <feMerge>
+                                        <feMergeNode in="blur" />
+                                        <feMergeNode in="SourceGraphic" />
+                                    </feMerge>
+                                </filter>
+                            </defs>
+
+                            <!-- Left ventricle (visible) -->
+                            <g id="lv" class="part" transform="translate(40,40)">
+                                <path
+                                    d="M210 30 C260 -10 350 10 360 110 C370 200 290 290 210 350 C130 290 60 200 70 110 C80 10 160 -10 210 30 Z"
+                                    fill="url(#g1)" stroke="#6c1e1b" stroke-width="3" />
+                            </g>
+
+                            <!-- Right ventricle -->
+                            <g id="rv" class="part" transform="translate(40,40)">
+                                <path d="M120 40 C80 20 40 50 50 110 C60 180 120 230 190 280 C160 220 140 150 120 40 Z"
+                                    fill="url(#g2)" stroke="#8a2b24" stroke-width="2.2" opacity="0.95" />
+                            </g>
+
+                            <!-- Atria simplified -->
+                            <g id="la" class="part" transform="translate(40,40)">
+                                <ellipse cx="280" cy="70" rx="50" ry="36" fill="#ffd0c8" stroke="#b04a44"
+                                    stroke-width="2" />
+                            </g>
+                            <g id="ra" class="part" transform="translate(40,40)">
+                                <ellipse cx="100" cy="70" rx="46" ry="34" fill="#ffd8cf" stroke="#a7453f"
+                                    stroke-width="2" />
+                            </g>
+
+                            <!-- Valves (symbolic shapes) -->
+                            <g id="mitral" class="part" transform="translate(40,40)">
+                                <path d="M240 120 L260 128 L245 145 L225 135 Z" fill="#fff2e8" stroke="#b58c7f"
+                                    stroke-width="1.2" opacity="0.9" />
+                            </g>
+                            <g id="tricuspid" class="part" transform="translate(40,40)">
+                                <path d="M140 120 L120 130 L135 150 L155 138 Z" fill="#fff2e8" stroke="#b58c7f"
+                                    stroke-width="1.2" opacity="0.9" />
+                            </g>
+
+                            <!-- Aorta & pulmonary trunk (symbolic) -->
+                            <g id="aorta" class="part" transform="translate(40,40)">
+                                <path d="M260 10 C260 -20 340 -30 340 30" stroke="#f7c6b7" stroke-width="8" fill="none"
+                                    stroke-linecap="round" />
+                            </g>
+                            <g id="pulmonary" class="part" transform="translate(40,40)">
+                                <path d="M160 6 C160 -20 80 -30 80 30" stroke="#fbe3da" stroke-width="8" fill="none"
+                                    stroke-linecap="round" />
+                            </g>
+
+                            <!-- overlay for pulsing effect -->
+                            <g id="pulseOverlay">
+                                <circle cx="210" cy="190" r="120" fill="none" stroke="#ff8b74" stroke-width="6"
+                                    opacity="0.06" />
+                            </g>
+
+                        </svg>
+
+                        <div style="display:flex;gap:8px;align-items:center">
+                            <div class="label-bubble" id="selectedInfo">Clique em uma parte para ver detalhes</div>
+                            <div class="controls">
+                                <button onclick="startSequence()" class="primary">Iniciar demonstração</button>
+                                <button onclick="pausePulse()">Pausar pulso</button>
+                                <button onclick="resetView()">Resetar</button>
+                            </div>
+                        </div>
+
+                        <div style="width:100%;margin-top:8px">
+                            <div style="font-weight:700">ECG (simulado)</div>
+                            <svg class="ecg" viewBox="0 0 400 80" preserveAspectRatio="none">
+                                <path id="ecgBase"
+                                    d="M0 50 L40 50 L60 50 L65 35 L70 65 L75 10 L85 50 L110 50 L140 50 L190 50 L195 35 L200 65 L205 10 L215 50 L400 50"
+                                    stroke="#5f6b78" stroke-width="2" fill="none" />
+                                <path id="ecgAnim"
+                                    d="M0 50 L40 50 L60 50 L65 35 L70 65 L75 10 L85 50 L110 50 L140 50 L190 50 L195 35 L200 65 L205 10 L215 50 L400 50"
+                                    stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="1000"
+                                    stroke-dashoffset="1000"></path>
+                            </svg>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="card">
+                    <h2>Fases da Sístole — guia</h2>
+                    <p class="step-desc">Role a página e acompanhe; quando quiser ver visualmente, clique em "Iniciar
+                        demonstração" para animar o SVG e sincronizar com o ECG.</p>
+                    <ol style="color:var(--muted)">
+                        <li><strong>1. Disparo SA:</strong> onda P — despolarização atrial.</li>
+                        <li><strong>2. Atrial systole:</strong> átrios contraem, completando o enchimento.</li>
+                        <li><strong>3. Atraso AV e contração isovolumétrica:</strong> AV atrasa brevemente; ventrículos
+                            iniciam contração com válvulas fechadas.</li>
+                        <li><strong>4. Ejeção:</strong> quando pressão ventricular > arterial, semilunares abrem e
+                            ocorre ejeção rápida.</li>
+                        <li><strong>5. Repolarização:</strong> onda T — relaxamento e início da diástole.</li>
+                    </ol>
+                </section>
+
+                <section class="card" id="quizSection">
+                    <h2>Quiz Final</h2>
+                    <p class="step-desc">Responda ao quiz para verificar seu entendimento. Você verá a pontuação ao
+                        final e poderá tentar novamente.</p>
+
+                    <div id="quizArea"></div>
+
+                    <div class="quiz-actions">
+                        <button class="primary" onclick="submitQuiz()">Enviar respostas</button>
+                        <button onclick="resetQuiz()">Limpar respostas</button>
+                        <div id="result" style="margin-left:12px;color:var(--muted)"></div>
+                    </div>
+
+                </section>
+
+            </div>
+
+            <aside class="aside">
+                <section class="card">
+                    <h3>Atalhos rápidos</h3>
+                    <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+                        <button onclick="scrollTo('anatomia')">Anatomia</button>
+                        <button onclick="scrollTo('sistole')">Fases</button>
+                        <button onclick="scrollTo('quizSection')">Quiz Final</button>
+                    </div>
+                </section>
+
+                <section class="card" style="margin-top:12px">
+                    <h3>Glossário</h3>
+                    <p class="step-desc"><strong>EDV:</strong> volume diastólico final. <strong>ESV:</strong> volume
+                        sistólico final. <strong>FE:</strong> fração de ejeção.</p>
+                </section>
+
+                <section class="card" style="margin-top:12px">
+                    <h3>Dicas para apresentação</h3>
+                    <ul style="color:var(--muted)">
+                        <li>Use a animação para mostrar diferenças entre normal e patológico.</li>
+                        <li>Explique o ECG ao mesmo tempo que mostra as fases.</li>
+                        <li>Peça aos colegas que cliquem nas partes para fixação ativa.</li>
+                    </ul>
+                </section>
+            </aside>
+        </div>
+
+        <footer>
+            <div>Feito para projeto de Fisiologia — personalize conforme necessidade da sua apresentação.</div>
+        </footer>
+    </main>
+
+    <script>
+        // Interactive SVG parts
+        const parts = ['lv', 'rv', 'la', 'ra', 'mitral', 'tricuspid', 'aorta', 'pulmonary'];
+        const infoMap = {
+            lv: 'Ventrículo esquerdo: principal responsável por bombear sangue para a circulação sistêmica (alta pressão).',
+            rv: 'Ventrículo direito: bombeia sangue para os pulmões (circulação pulmonar).',
+            la: 'Átrio esquerdo: recebe sangue oxigenado dos pulmões.',
+            ra: 'Átrio direito: recebe sangue venoso do corpo.',
+            mitral: 'Válvula mitral: entre átrio esquerdo e ventrículo esquerdo (AV).',
+            tricuspid: 'Válvula tricúspide: entre átrio direito e ventrículo direito (AV).',
+            aorta: 'Aorta (símbolo): artéria de saída do ventrículo esquerdo.',
+            pulmonary: 'Artéria pulmonar (símbolo): saída do ventrículo direito para os pulmões.'
+        };
+
+        parts.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.style.cursor = 'pointer';
+            el.addEventListener('click', () => {
+                selectPart(id);
+            });
+        });
+
+        function selectPart(id) {
+            // visual contraction effect: scale briefly
+            const g = document.getElementById(id);
+            if (!g) return;
+            // remove highlight from others
+            parts.forEach(p => { const e = document.getElementById(p); if (e) e.style.filter = 'none'; });
+            g.style.filter = 'drop-shadow(0 12px 18px rgba(239,108,53,0.25))';
+            // small scale animation on child shapes
+            g.querySelectorAll('path, ellipse, rect, circle').forEach(sh => {
+                sh.animate([
+                    { transform: 'scale(1)' },
+                    { transform: 'scale(0.88)' },
+                    { transform: 'scale(1)' }
+                ], { duration: 420, easing: 'ease-in-out' });
+            });
+            document.getElementById('selectedInfo').textContent = infoMap[id] || id;
+        }
+
+        // Pulse animation (global sync)
+        let pulseInterval = null;
+        let ecgPath = document.getElementById('ecgAnim');
+        function startPulse() {
+            if (pulseInterval) return;
+            pulseInterval = setInterval(() => {
+                // animate ecg path reveal
+                ecgPath.style.transition = 'stroke-dashoffset 850ms linear';
+                ecgPath.style.strokeDashoffset = '0';
+                setTimeout(() => { ecgPath.style.transition = 'none'; ecgPath.style.strokeDashoffset = '1000'; }, 900);
+                // subtle scale for ventricles simulating sístole sequence
+                heartbeatSequence();
+            }, 950);
+        }
+
+        function heartbeatSequence() {
+            // sequence: atria -> isovolumetric -> ventricles eject
+            setTimeout(() => selectPart('ra'), 60); // RA
+            setTimeout(() => selectPart('la'), 140); // LA (atrial systole)
+            setTimeout(() => selectPart('tricuspid'), 260); // AV area
+            setTimeout(() => selectPart('mitral'), 300);
+            setTimeout(() => selectPart('lv'), 420); // LV contracts
+            setTimeout(() => selectPart('rv'), 520); // RV contracts
+        }
+
+        function startSequence() { startPulse(); }
+        function pausePulse() { if (pulseInterval) { clearInterval(pulseInterval); pulseInterval = null; } }
+        function resetView() { pausePulse(); parts.forEach(p => { const e = document.getElementById(p); if (e) e.style.filter = 'none'; }); document.getElementById('selectedInfo').textContent = 'Clique em uma parte para ver detalhes'; }
+
+        // Scroll helper
+        function scrollTo(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+
+        // QUIZ data
+        const quizData = [
+            { q: 'Qual onda do ECG corresponde à despolarização atrial?', a: ['Complexo QRS', 'Onda P', 'Onda T'], correct: 1 },
+            { q: 'Durante a fase isovolumétrica, o volume ventricular:', a: ['Diminui rapidamente', 'Permanece praticamente igual', 'Aumenta muito'], correct: 1 },
+            { q: 'Qual válvula evita refluxo entre átrio esquerdo e ventrículo esquerdo?', a: ['Mitral', 'Aórtica', 'Tricúspide'], correct: 0 },
+            { q: 'A principal artéria que sai do ventrículo esquerdo é:', a: ['Aorta', 'Artéria pulmonar', 'Vena cava'], correct: 0 },
+            { q: 'A onda T no ECG representa:', a: ['Despolarização ventricular', 'Repolarização ventricular', 'Despolarização atrial'], correct: 1 },
+            { q: 'O nó SA é responsável por:', a: ['Atrair sangue para os ventrículos', 'Iniciar o impulso elétrico do coração', 'Abrir as válvulas semilunares'], correct: 1 },
+            { q: 'Quando as válvulas semilunares abrem:', a: ['A pressão ventricular é menor que a arterial', 'A pressão ventricular supera a pressão arterial/pulmonar', 'As válvulas AV se abrem simultaneamente'], correct: 1 }
+        ];
+
+        // render quiz
+        const quizArea = document.getElementById('quizArea');
+        function renderQuiz() {
+            quizArea.innerHTML = '';
+            quizData.forEach((item, idx) => {
+                const div = document.createElement('div'); div.className = 'quiz-item';
+                const q = document.createElement('div'); q.style.fontWeight = '700'; q.textContent = (idx + 1) + '. ' + item.q;
+                div.appendChild(q);
+                item.a.forEach((opt, i) => {
+                    const b = document.createElement('button'); b.className = 'option'; b.textContent = opt; b.setAttribute('data-q', idx); b.setAttribute('data-opt', i);
+                    b.addEventListener('click', () => selectOption(b));
+                    div.appendChild(b);
+                });
+                quizArea.appendChild(div);
+            });
+        }
+
+        // selected answers store
+        const answers = new Array(quizData.length).fill(null);
+        function selectOption(btn) {
+            const q = Number(btn.getAttribute('data-q'));
+            const opt = Number(btn.getAttribute('data-opt'));
+            // deselect siblings
+            const parent = btn.parentNode;
+            parent.querySelectorAll('.option').forEach(o => { o.classList.remove('selected'); });
+            btn.classList.add('selected');
+            answers[q] = opt;
+        }
+
+        function submitQuiz() {
+            let score = 0; let unanswered = 0;
+            quizData.forEach((item, i) => {
+                const ans = answers[i];
+                if (ans === null) { unanswered++; return; }
+                const parent = quizArea.children[i];
+                parent.querySelectorAll('.option').forEach((o, idx) => {
+                    o.disabled = true;
+                    if (idx === item.correct) { o.classList.add('correct'); }
+                    if (idx === ans && ans !== item.correct) { o.classList.add('wrong'); }
+                });
+                if (ans === item.correct) score++;
+            });
+            const result = document.getElementById('result');
+            result.innerHTML = `<span class=\"score\">Pontuação: ${score} / ${quizData.length}</span>` + (unanswered ? ` <span style=\"color:var(--muted)\">(${unanswered} sem resposta)</span>` : '');
+        }
+
+        function resetQuiz() {
+            // clear selections and enable
+            answers.fill(null);
+            quizArea.querySelectorAll('.quiz-item').forEach((div, idx) => {
+                div.querySelectorAll('.option').forEach(o => { o.disabled = false; o.classList.remove('correct', 'wrong', 'selected'); });
+            });
+            document.getElementById('result').textContent = '';
+        }
+
+        // initialize
+        renderQuiz();
+
+        // ensure ecg path initial state
+        document.getElementById('ecgAnim').style.strokeDashoffset = '1000';
+
+    </script>
+
+    
+</body>
+
+</html>

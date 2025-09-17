@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contração Cardíaca — Sístole (Explainer)</title>
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --accent: #ef6c35;
+            --muted: #9aa4b2;
+            --glass: rgba(255, 255, 255, 0.04);
+            --success: #2eb872;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+            color: #e6eef6;
+            background: linear-gradient(180deg, #071028 0%, #071a2b 100%);
+            -webkit-font-smoothing: antialiased
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 28px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), transparent);
+            backdrop-filter: blur(6px)
+        }
+
+        header h1 {
+            font-size: 18px;
+            margin: 0;
+            color: #fff
+        }
+
+        nav a {
+            color: var(--muted);
+            margin-left: 14px;
+            text-decoration: none;
+            font-size: 14px
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 28px auto;
+            padding: 20px
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
+            margin-bottom: 18px
+        }
+
+        h2,
+        h3,
+        h4 {
+            margin-top: 0
+        }
+
+        .step-desc {
+            color: var(--muted);
+            font-size: 15px
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer
+        }
+
+        button.primary {
+            background: var(--accent);
+            border-color: transparent
+        }
+
+        /* heart */
+        .heart-real img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5)
+        }
+
+        /* quiz */
+        .quiz-item {
+            margin-bottom: 16px
+        }
+
+        .option {
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            margin-top: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            cursor: pointer;
+            color: #fff
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background: rgba(46, 184, 114, 0.08)
+        }
+
+        .option.wrong {
+            border-color: #ef5454;
+            background: rgba(239, 84, 84, 0.06)
+        }
+
+        .retry {
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--muted);
+            cursor: pointer;
+            text-decoration: underline
+        }
+
+        footer {
+            color: var(--muted);
+            text-align: center;
+            padding: 18px 0;
+            margin-top: 18px
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Contração Cardíaca — Sístole</h1>
+        <nav>
+            <a href="#introducao">Introdução</a>
+            <a href="#anatomia">Anatomia</a>
+            <a href="#sistole">Sístole</a>
+            <a href="#quiz">Quiz</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="introducao" class="card">
+            <h2>Introdução</h2>
+            <p class="step-desc">Nesta página, você vai entender de forma simples e interativa como funciona a contração
+                do coração (sístole). Vamos percorrer: anatomia, sistema de condução elétrica, fases da sístole e, ao
+                final, testar seu aprendizado com um quiz.</p>
+        </section>
+
+        <section id="anatomia" class="card">
+            <h2>Anatomia do Coração</h2>
+            <p class="step-desc">Veja uma representação realista do coração humano. Cada parte desempenha um papel
+                essencial para que a contração aconteça de forma coordenada.</p>
+            <div class="heart-real">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Diagram_of_the_human_heart_%28cropped%29.svg"
+                    alt="Diagrama realista do coração" />
+            </div>
+            <ul style="margin-top:12px;color:var(--muted)">
+                <li><strong>Átrios:</strong> câmaras superiores que recebem o sangue.</li>
+                <li><strong>Ventrículos:</strong> câmaras inferiores que bombeiam o sangue.</li>
+                <li><strong>Válvulas:</strong> controlam a passagem de sangue e evitam refluxo.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Sistema de Condução Elétrica</h2>
+            <p class="step-desc">O coração possui um sistema elétrico próprio que garante a sequência correta de
+                contração.</p>
+            <ol style="color:var(--muted)">
+                <li><strong>Nó SA:</strong> inicia o impulso.</li>
+                <li><strong>Átrios:</strong> se contraem (onda P no ECG).</li>
+                <li><strong>Nó AV:</strong> atrasa o impulso para permitir enchimento ventricular.</li>
+                <li><strong>Fibras de Purkinje:</strong> conduzem rápido, estimulando os ventrículos.</li>
+            </ol>
+        </section>
+
+        <section id="sistole" class="card">
+            <h2>Fases da Sístole</h2>
+            <p class="step-desc">Acompanhe o que acontece em cada etapa da contração.</p>
+            <ol style="color:var(--muted)">
+                <li><strong>Atrial systole:</strong> átrios se contraem completando enchimento.</li>
+                <li><strong>Contração isovolumétrica:</strong> ventrículos começam a contrair, todas válvulas fechadas.
+                </li>
+                <li><strong>Ejeção ventricular:</strong> válvulas semilunares abrem e o sangue é bombeado.</li>
+                <li><strong>Relaxamento:</strong> ventrículos relaxam e inicia a diástole.</li>
+            </ol>
+        </section>
+
+        <section id="quiz" class="card">
+            <h2>Quiz — Teste seu Conhecimento</h2>
+            <div id="quizArea">
+                <div class="quiz-item">
+                    <div style="font-weight:700">Qual onda do ECG corresponde à despolarização ventricular?</div>
+                    <button class="option" data-correct="true" onclick="answer(this)">Complexo QRS</button>
+                    <button class="option" onclick="answer(this)">Onda P</button>
+                    <button class="option" onclick="answer(this)">Onda T</button>
+                </div>
+                <div class="quiz-item">
+                    <div style="font-weight:700">Durante contração isovolumétrica há abertura das válvulas semilunares?
+                    </div>
+                    <button class="option" onclick="answer(this)">Sim</button>
+                    <button class="option" data-correct="true" onclick="answer(this)">Não — todas as válvulas estão
+                        fechadas</button>
+                </div>
+            </div>
+            <div class="retry" onclick="resetQuiz()">Tentar novamente</div>
+        </section>
+
+        <footer>
+            <div>Projeto de Fisiologia — Contração Cardíaca (Sístole)</div>
+        </footer>
+    </main>
+
+    <script>
+        function answer(btn) {
+            const correct = btn.getAttribute('data-correct') === 'true';
+            if (correct) {
+                btn.classList.add('correct');
+                btn.textContent = btn.textContent + ' ✓ Correto';
+            } else {
+                btn.classList.add('wrong');
+                btn.textContent = btn.textContent + ' ✗ Errado';
+            }
+            const parent = btn.parentNode;
+            parent.querySelectorAll('.option').forEach(o => o.disabled = true);
+        }
+
+        function resetQuiz() {
+            document.querySelectorAll('.option').forEach(o => {
+                o.disabled = false;
+                o.classList.remove('correct', 'wrong');
+                o.textContent = o.textContent.replace(' ✓ Correto', '').replace(' ✗ Errado', '');
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sístole em Movimento — Kaylany da Silva (Enfermagem)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f6f8fb;
+            --card: #ffffff;
+            --muted: #6b7280;
+            --accent: #e4492b;
+            --accent-2: #ff7a59;
+            --glass: rgba(11, 22, 33, 0.04);
+            --max: 1100px
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+            background: linear-gradient(180deg, #fbfdff 0%, #f1f5f9 100%);
+            color: #0f1724;
+            -webkit-font-smoothing: antialiased
+        }
+
+        /* Layout */
+        header {
+            background: var(--card);
+            border-bottom: 1px solid #e6edf3;
+            position: sticky;
+            top: 0;
+            z-index: 40
+        }
+
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700
+        }
+
+        .sitename {
+            font-weight: 700;
+            font-size: 16px
+        }
+
+        nav a {
+            margin-left: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600
+        }
+
+        .cta {
+            background: var(--accent);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700
+        }
+
+        main {
+            max-width: var(--max);
+            margin: 28px auto;
+            padding: 0 20px
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 28px;
+            align-items: center
+        }
+
+        .hero-card {
+            background: var(--card);
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06)
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 28px
+        }
+
+        .lead {
+            color: var(--muted);
+            margin-top: 8px;
+            font-size: 15px
+        }
+
+        .hero-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        /* sections */
+        section.card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+            margin-top: 18px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 18px
+        }
+
+        @media (max-width:1000px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            .wrap {
+                padding: 14px
+            }
+        }
+
+        h2.section-title {
+            margin: 0 0 8px 0
+        }
+
+        p.desc {
+            color: var(--muted);
+            margin: 0 0 12px 0
+        }
+
+        /* list and timeline */
+        .timeline {
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+        .timeline li {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-top: 1px dashed #eef3f7
+        }
+
+        .timeline li:first-child {
+            border-top: none
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin-top: 6px
+        }
+
+        /* interactive cards */
+        .parts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px
+        }
+
+        .part {
+            background: var(--glass);
+            padding: 10px 12px;
+            border-radius: 10px;
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        /* accordion */
+        .accordion {
+            margin-top: 12px
+        }
+
+        .acc-item {
+            border-top: 1px solid #eef3f7
+        }
+
+        .acc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            cursor: pointer
+        }
+
+        .acc-body {
+            padding: 12px 12px 18px 12px;
+            color: var(--muted);
+            display: none
+        }
+
+        /* footer */
+        footer {
+            max-width: var(--max);
+            margin: 28px auto;
+            padding: 22px;
+            text-align: center;
+            color: var(--muted)
+        }
+
+        /* small components */
+        .kbd {
+            background: #111827;
+            color: #fff;
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 12px
+        }
+
+        /* responsive visual heart */
+        .heart-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        svg.heart {
+            width: 100%;
+            max-width: 380px;
+            height: auto
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <div class="brand">
+                <div class="logo">SM</div>
+                <div>
+                    <div class="sitename">Sístole em Movimento</div>
+                    <div style="font-size:12px;color:var(--muted)">Projeto de Fisiologia — Kaylany da Silva (Enf.)</div>
+                </div>
+            </div>
+            <nav>
+                <a href="#introducao">Início</a>
+                <a href="#anatomia">Anatomia</a>
+                <a href="#conducao">Condução</a>
+                <a href="#fases">Fases</a>
+                <a href="#quiz">Quiz</a>
+                <a class="cta" href="#quiz">Testar</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="introducao" class="hero-card hero">
+            <div>
+                <h1>Sístole em Movimento</h1>
+                <p class="lead">Uma experiência interativa e profissional para entender passo a passo a contração
+                    cardíaca (sístole). Concebido para estudantes e profissionais de enfermagem.</p>
+                <p style="margin-top:16px">Este material aborda a anatomia, o sistema de condução elétrica, as fases da
+                    sístole, relação com ECG e patologias comuns. Ao final, teste seu aprendizado.</p>
+                <div style="margin-top:18px;display:flex;gap:10px">
+                    <a class="cta" href="#conducao">Começar</a>
+                    <a href="#anatomia"
+                        style="padding:8px 12px;border-radius:8px;background:transparent;border:1px solid #e6edf3;color:var(--muted);text-decoration:none;font-weight:700">Ver
+                        anatomia</a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <!-- simplified, clean SVG logo/heart for header -->
+                <svg class="heart" viewBox="0 0 420 420" role="img" aria-label="Coração estilizado">
+                    <defs>
+                        <linearGradient id="hg" x1="0" x2="1">
+                            <stop offset="0" stop-color="#ff7a59" />
+                            <stop offset="1" stop-color="#e4492b" />
+                        </linearGradient>
+                    </defs>
+                    <g transform="translate(20,10)">
+                        <path
+                            d="M210 30 C260 -10 350 10 360 110 C370 200 290 290 210 350 C130 290 60 200 70 110 C80 10 160 -10 210 30 Z"
+                            fill="url(#hg)" stroke="#b23c2f" stroke-width="2" />
+                        <path d="M140 90 Q210 160 280 90" stroke="#fff" stroke-width="6" fill="none"
+                            stroke-linecap="round" opacity="0.9" />
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <div class="grid">
+            <div>
+                <section id="anatomia" class="card">
+                    <h2 class="section-title">Anatomia do Coração</h2>
+                    <p class="desc">Visão geral com foco nas estruturas relevantes para a sístole: átrios, ventrículos,
+                        válvulas AV (mitral/tricúspide) e válvulas semilunares.</p>
+                    <div class="parts" style="margin-top:12px">
+                        <div class="part">Átrio Direito</div>
+                        <div class="part">Átrio Esquerdo</div>
+                        <div class="part">Ventrículo Direito</div>
+                        <div class="part">Ventrículo Esquerdo</div>
+                        <div class="part">Válvula Mitral</div>
+                        <div class="part">Válvula Tricúspide</div>
+                        <div class="part">Aorta</div>
+                    </div>
+
+                    <h3 style="margin-top:16px">Leitura rápida</h3>
+                    <ul style="color:var(--muted);margin:8px 0 0 18px">
+                        <li>Átrios: recepção de sangue e contribuição para pré-carga.</li>
+                        <li>Ventrículos: geram pressão para ejeção — o VE suporta maior pressão.</li>
+                        <li>Válvulas: garantem fluxo unidirecional e suportam fases de pressão.</li>
+                    </ul>
+                </section>
+
+                <section id="conducao" class="card">
+                    <h2 class="section-title">Sistema de Condução Elétrica</h2>
+                    <p class="desc">Conhecer o sistema de condução é essencial para relacionar eventos elétricos (ECG) à
+                        mecânica (contração).</p>
+
+                    <ol class="timeline">
+                        <li>
+                            <div class="dot"></div>
+                            <div><strong>Nó SA</strong> — marca-passo natural; inicia a despolarização (Onda P).</div>
+                        </li>
+                        <li>
+                            <div class="dot"></div>
+                            <div><strong>Átrios</strong> — contraem-se, completando enchimento ventricular.</div>
+                        </li>
+                        <li>
+                            <div class="dot"></div>
+                            <div><strong>Nó AV</strong> — atraso (PR) que permite enchimento pré-sistólico.</div>
+                        </li>
+                        <li>
+                            <div class="dot"></div>
+                            <div><strong>Fascículos e Purkinje</strong> — conduzem até os ventrículos, sincronizando
+                                ejeção.</div>
+                        </li>
+                    </ol>
+
+                    <div class="accordion" id="accordion">
+                        <div class="acc-item">
+                            <div class="acc-head">Como isso aparece no ECG <span class="kbd">P • PR • QRS • T</span>
+                            </div>
+                            <div class="acc-body">O ECG é a representação elétrica: P = despolarização atrial; QRS =
+                                despolarização ventricular; T = repolarização ventricular.</div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-head">Importância clínica <span style="color:var(--muted)"> (breve)</span>
+                            </div>
+                            <div class="acc-body">Arritmias, bloqueios de ramo ou alterações valvares mudam a sequência
+                                e a eficiência de ejeção, impactando a hemodinâmica.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="fases" class="card">
+                    <h2 class="section-title">Fases da Sístole (resumo)</h2>
+                    <p class="desc">Do disparo elétrico à ejeção, entenda a sequência mecânica.</p>
+                    <ol style="color:var(--muted);margin:0 0 0 18px">
+                        <li><strong>Atrial systole:</strong> contribui com volume final (pré-carga).</li>
+                        <li><strong>Contração isovolumétrica:</strong> aumento de pressão com volume constante (válvulas
+                            fechadas).</li>
+                        <li><strong>Ejeção rápida e lenta:</strong> sangue é expelido pelas semilunares.</li>
+                        <li><strong>Relaxamento:</strong> repolarização e início da diástole.</li>
+                    </ol>
+                </section>
+
+            </div>
+
+            <aside class="aside">
+                <section class="card">
+                    <h3>Visual interativo</h3>
+                    <p class="desc">Clique nas seções do coração para ver uma descrição rápida.</p>
+                    <div class="heart-wrap" style="margin-top:8px">
+                        <!-- lightweight inline SVG (clicks handled later if needed) -->
+                        <svg viewBox="0 0 420 420" class="heart" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="gH" x1="0" x2="1">
+                                    <stop offset="0" stop-color="#ff9b86" />
+                                    <stop offset="1" stop-color="#e4492b" />
+                                </linearGradient>
+                            </defs>
+                            <g transform="translate(20,10)">
+                                <path
+                                    d="M210 30 C260 -10 350 10 360 110 C370 200 290 290 210 350 C130 290 60 200 70 110 C80 10 160 -10 210 30 Z"
+                                    fill="url(#gH)" stroke="#b23c2f" stroke-width="2" />
+                            </g>
+                        </svg>
+                    </div>
+                </section>
+
+                <section class="card" style="margin-top:12px">
+                    <h3>Glossário rápido</h3>
+                    <p class="desc"><strong>EDV:</strong> volume diastólico final.<br><strong>ESV:</strong> volume
+                        sistólico final.<br><strong>FE:</strong> fração de ejeção.</p>
+                </section>
+
+                <section class="card" style="margin-top:12px">
+                    <h3>Referência</h3>
+                    <p class="desc">Use livros de fisiologia (Guyton, Ganong) e artigos de revisão para aprofundar.
+                        Adapte conteúdos conforme o público.</p>
+                </section>
+            </aside>
+        </div>
+
+        <section id="quiz" class="card">
+            <h2 class="section-title">Quiz Rápido</h2>
+            <p class="desc">Perguntas para revisar os conceitos principais.</p>
+            <ol style="color:var(--muted);margin-left:18px">
+                <li>O que representa a onda P no ECG?</li>
+                <li>Durante a fase isovolumétrica, as válvulas semilunares estão abertas ou fechadas?</li>
+                <li>Qual ventrículo gera maior pressão sistêmica?</li>
+            </ol>
+            <p style="margin-top:12px;color:var(--muted)">Você pode usar este espaço para aplicar perguntas interativas
+                em sua apresentação.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <div>© Kaylany da Silva — Curso de Enfermagem • Projeto &middot; Sístole em Movimento</div>
+        <div style="margin-top:6px;color:var(--muted)">Feito para fins educacionais — personalize o conteúdo para
+            trabalhos e apresentações.</div>
+    </footer>
+
+    <script>
+        // Accordion behavior
+        document.querySelectorAll('.acc-head').forEach(head => {
+            head.addEventListener('click', () => {
+                const body = head.nextElementSibling;
+                const open = body.style.display === 'block';
+                document.querySelectorAll('.acc-body').forEach(b => b.style.display = 'none');
+                body.style.display = open ? 'none' : 'block';
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const id = a.getAttribute('href').slice(1);
+                const el = document.getElementById(id);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+
+</html>

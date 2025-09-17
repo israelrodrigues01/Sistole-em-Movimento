@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contração Cardíaca — Sístole (Explainer)</title>
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --accent: #ef6c35;
+            --muted: #9aa4b2;
+            --glass: rgba(255, 255, 255, 0.04);
+            --success: #2eb872;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+            color: #e6eef6;
+            background: linear-gradient(180deg, #071028 0%, #071a2b 100%);
+            -webkit-font-smoothing: antialiased
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 28px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), transparent);
+            backdrop-filter: blur(6px)
+        }
+
+        header h1 {
+            font-size: 18px;
+            margin: 0;
+            color: #fff
+        }
+
+        nav a {
+            color: var(--muted);
+            margin-left: 14px;
+            text-decoration: none;
+            font-size: 14px
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 28px auto;
+            padding: 20px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 20px
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 18px
+        }
+
+        .hero h2 {
+            margin: 0;
+            font-size: 20px
+        }
+
+        .hero p {
+            margin: 6px 0;
+            color: var(--muted)
+        }
+
+        /* heart area */
+        .heart-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        svg.heart {
+            width: 320px;
+            height: 320px
+        }
+
+        .labels {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px
+        }
+
+        .label {
+            background: var(--glass);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        ol.steps {
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+        ol.steps li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent)
+        }
+
+        .step-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--muted)
+        }
+
+        .step-title {
+            font-weight: 700
+        }
+
+        .step-desc {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 4px
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer
+        }
+
+        button.primary {
+            background: var(--accent);
+            border-color: transparent
+        }
+
+        .ecg-card {
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch
+        }
+
+        svg.ecg {
+            height: 100%;
+            width: 100%;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 2
+        }
+
+        .ecg path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000
+        }
+
+        .ecg .reveal {
+            transition: stroke-dashoffset 700ms linear
+        }
+
+        /* highlight and animation classes */
+        .active {
+            filter: drop-shadow(0 8px 18px rgba(239, 108, 53, 0.25));
+        }
+
+        .contract {
+            transform-origin: 50% 60%;
+            transition: transform 450ms ease-in
+        }
+
+        /* quiz */
+        .quiz-item {
+            margin-bottom: 12px
+        }
+
+        .option {
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            margin-top: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            cursor: pointer
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background: rgba(46, 184, 114, 0.08)
+        }
+
+        .option.wrong {
+            border-color: #ef5454;
+            background: rgba(239, 84, 84, 0.06)
+        }
+
+        footer {
+            color: var(--muted);
+            text-align: center;
+            padding: 18px 0;
+            margin-top: 18px
+        }
+
+        @media(max-width:980px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .heart-wrap {
+                order: -1
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Contração Cardíaca — Sístole</h1>
+        <nav>
+            <a href="#anatomia">Anatomia</a>
+            <a href="#sistole">Sístole</a>
+            <a href="#quiz">Quiz</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="card hero">
+            <div style="display:flex;gap:18px;align-items:center">
+                <div>
+                    <h2>Entenda passo a passo como o coração se contrai (sístole)</h2>
+                    <p>Um passeio interativo que mostra: anatomia, sistema de condução elétrica, fases da sístole,
+                        relação com o ECG e patologias comuns.</p>
+                    <div style="margin-top:12px;display:flex;gap:8px">
+                        <button class="primary" onclick="goToStep(0)">Iniciar passo a passo</button>
+                        <button onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Ir para
+                            Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid">
+            <div>
+                <section id="anatomia" class="card">
+                    <h3>Anatomia rápida (clique nas partes)</h3>
+                    <p class="step-desc">Clique nas câmaras ou válvulas no coração abaixo para ver o nome e função.</p>
+                    <div class="heart-wrap">
+                        <!-- Simplified interactive SVG heart -->
+                        <svg class="heart" viewBox="0 0 200 200" id="svgHeart" role="img"
+                            aria-label="Diagrama simplificado do coração">
+                            <!-- right atrium -->
+                            <g id="rightAtrium" tabindex="0" aria-label="Átrio direito">
+                                <ellipse cx="60" cy="60" rx="30" ry="22" fill="#2a9df4" opacity="0.16"
+                                    stroke="#2a9df4" />
+                                <title>Átrio direito</title>
+                            </g>
+                            <!-- left atrium -->
+                            <g id="leftAtrium" tabindex="0" aria-label="Átrio esquerdo">
+                                <ellipse cx="140" cy="60" rx="30" ry="22" fill="#ef6c35" opacity="0.16"
+                                    stroke="#ef6c35" />
+                                <title>Átrio esquerdo</title>
+                            </g>
+                            <!-- right ventricle -->
+                            <g id="rightVentricle" tabindex="0" aria-label="Ventrículo direito">
+                                <path d="M40 92 Q65 150 100 150" fill="#2a9df4" opacity="0.14" stroke="#2a9df4" />
+                                <title>Ventrículo direito</title>
+                            </g>
+                            <!-- left ventricle -->
+                            <g id="leftVentricle" tabindex="0" aria-label="Ventrículo esquerdo">
+                                <path d="M160 92 Q135 150 100 150" fill="#ef6c35" opacity="0.16" stroke="#ef6c35" />
+                                <title>Ventrículo esquerdo</title>
+                            </g>
+                            <!-- valves (symbolic) -->
+                            <g id="mitralValve" aria-label="Válvula mitral">
+                                <rect x="115" y="78" width="12" height="6" rx="2" fill="#fff" opacity="0.6" />
+                            </g>
+                            <g id="tricuspidValve" aria-label="Válvula tricúspide">
+                                <rect x="72" y="78" width="12" height="6" rx="2" fill="#fff" opacity="0.6" />
+                            </g>
+                            <g id="aorticValve" aria-label="Válvula aórtica">
+                                <rect x="98" y="40" width="8" height="8" rx="2" fill="#fff" opacity="0.6" />
+                            </g>
+                            <g id="pulmonaryValve" aria-label="Válvula pulmonar">
+                                <rect x="60" y="30" width="8" height="8" rx="2" fill="#fff" opacity="0.6" />
+                            </g>
+                        </svg>
+
+                        <div class="labels">
+                            <div class="label">Átrio Direito</div>
+                            <div class="label">Átrio Esquerdo</div>
+                            <div class="label">Ventrículos</div>
+                            <div class="label">Válvulas AV e Semilunares</div>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top:14px">Sistema de condução</h4>
+                    <p class="step-desc">SA → Átrios → AV (delay) → His → Ramo direito/esquerdo → Fibras de Purkinje.
+                    </p>
+                    <ol class="steps" aria-hidden="false">
+                        <li>
+                            <div class="step-dot">1</div>
+                            <div>
+                                <div class="step-title">Nó SA</div>
+                                <div class="step-desc">Marca-passo natural: inicia o impulso elétrico.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-dot">2</div>
+                            <div>
+                                <div class="step-title">Átrios se contraem</div>
+                                <div class="step-desc">Atrial systole — contribui para enchimento final dos ventrículos.
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-dot">3</div>
+                            <div>
+                                <div class="step-title">Nó AV</div>
+                                <div class="step-desc">Atraso que permite enchimento antes da sístole ventricular.</div>
+                            </div>
+                        </li>
+                    </ol>
+                </section>
+
+                <section id="sistole" class="card" style="margin-top:18px">
+                    <h3>Sístole — passo a passo</h3>
+                    <p class="step-desc">Use os controles ao lado para avançar entre as fases; o coração na tela muda
+                        conforme cada fase.</p>
+                    <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
+                        <div style="flex:1">
+                            <div id="stepTitle" style="font-weight:700">Pressione "Iniciar"</div>
+                            <div id="stepText" style="color:var(--muted);margin-top:6px">Explicação detalhada aparecerá
+                                aqui.</div>
+                            <div class="controls">
+                                <button onclick="prevStep()">Anterior</button>
+                                <button class="primary" onclick="nextStep()">Próximo</button>
+                                <button onclick="resetSteps()">Reset</button>
+                            </div>
+                        </div>
+                        <div style="width:40%" class="ecg-card card">
+                            <div style="font-weight:700">ECG (simulação)</div>
+                            <svg class="ecg" viewBox="0 0 400 120" preserveAspectRatio="none">
+                                <path id="ecgPath"
+                                    d="M0 80 L40 80 L60 80 L65 60 L70 90 L75 20 L85 80 L110 80 L130 80 L180 80 L185 60 L190 90 L195 20 L205 80 L400 80"
+                                    stroke="#9aa4b2" stroke-width="2" fill="none" />
+                                <path id="ecgReveal" class="reveal"
+                                    d="M0 80 L40 80 L60 80 L65 60 L70 90 L75 20 L85 80 L110 80 L130 80 L180 80 L185 60 L190 90 L195 20 L205 80 L400 80"
+                                    stroke="#fff" stroke-width="2" fill="none" />
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card" style="margin-top:18px">
+                    <h3>Tipos e alterações importantes</h3>
+                    <ul style="color:var(--muted)">
+                        <li><strong>Arritmias:</strong> alteram o início do impulso (ex.: fibrilação atrial).</li>
+                        <li><strong>Insuficiência valvar:</strong> permite refluxo e reduz ejeção eficiente.</li>
+                        <li><strong>Insuficiência ventricular:</strong> reduz fração de ejeção — menos sangue expelido.
+                        </li>
+                    </ul>
+                    <p class="step-desc" style="margin-top:8px">Dica: destaque cada alteração no modo de demonstração
+                        para comparar com o normal.</p>
+                </section>
+            </div>
+
+            <aside>
+                <section class="card">
+                    <h4>Visão interativa</h4>
+                    <p class="step-desc">Use os botões abaixo para avançar entre fases da sístole e observar o ECG e a
+                        contração.</p>
+                    <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+                        <button onclick="goToStep(0)">1 — SA e Atrial systole</button>
+                        <button onclick="goToStep(1)">2 — Atraso AV & pré-enchimento</button>
+                        <button onclick="goToStep(2)">3 — Isovolumétrica</button>
+                        <button onclick="goToStep(3)">4 — Ejeção ventricular</button>
+                        <button onclick="goToStep(4)">5 — Relaxamento / início diástole</button>
+                    </div>
+                </section>
+
+                <section class="card" style="margin-top:12px">
+                    <h4>Glossário rápido</h4>
+                    <p class="step-desc"><strong>EDV:</strong> Volume diastólico final. <strong>ESV:</strong> Volume
+                        sistólico final. <strong>FE:</strong> Fração de ejeção = (EDV-ESV)/EDV.</p>
+                </section>
+
+                <section class="card" style="margin-top:12px">
+                    <h4>Quiz rápido</h4>
+                    <div id="quiz" style="margin-top:6px">
+                        <div class="quiz-item">
+                            <div style="font-weight:700">Qual onda do ECG corresponde à despolarização ventricular?
+                            </div>
+                            <button class="option" data-correct="true" onclick="answer(this)">Complexo QRS</button>
+                            <button class="option" onclick="answer(this)">Onda P</button>
+                            <button class="option" onclick="answer(this)">Onda T</button>
+                        </div>
+                        <div class="quiz-item">
+                            <div style="font-weight:700">Durante isovolumétrica há abertura das válvulas semilunares?
+                            </div>
+                            <button class="option" onclick="answer(this)">Sim</button>
+                            <button class="option" data-correct="true" onclick="answer(this)">Não — todas as válvulas
+                                estão fechadas</button>
+                        </div>
+                        <div style="margin-top:10px;color:var(--muted);font-size:13px">Feedback imediato ao clicar nas
+                            opções.</div>
+                    </div>
+                </section>
+
+            </aside>
+        </div>
+
+        <footer>
+            <div>Feito para projeto de Fisiologia — personalize o conteúdo para sua apresentação.</div>
+            <div style="margin-top:6px;font-size:13px">Créditos: anatomia simplificada para fins educacionais.</div>
+        </footer>
+    </main>
+
+    <script>
+        // Steps content (Português) — cada passo indica partes que devem ser destacadas
+        const steps = [
+            {
+                title: 'Nó SA e Atrial systole',
+                text: 'O nó sinusal (SA) dispara. Há despolarização atrial (onda P). Os átrios se contraem, contribuindo para o enchimento final dos ventrículos (pré-carga).',
+                highlight: ['rightAtrium', 'leftAtrium'],
+                ecgProgress: 180
+            },
+            {
+                title: 'Atraso AV (PR) — pré-enchimento final',
+                text: 'O impulso chega ao nó AV e há um pequeno atraso (período PR) que permite o enchimento ventricular antes da contração ventricular.',
+                highlight: ['tricuspidValve', 'mitralValve'],
+                ecgProgress: 240
+            },
+            {
+                title: 'Isovolumétrica (início da sístole ventricular)',
+                text: 'Ventrículos iniciam contração; todas as válvulas estão fechadas. A pressão ventricular aumenta sem saída de sangue (volume constante).',
+                highlight: ['leftVentricle', 'rightVentricle'],
+                ecgProgress: 320
+            },
+            {
+                title: 'Ejeção ventricular',
+                text: 'Quando a pressão ventricular supera a pressão aórtica/pulmonar, as válvulas semilunares abrem e ocorre ejeção rápida do sangue para a circulação.',
+                highlight: ['aorticValve', 'pulmonaryValve', 'leftVentricle'],
+                ecgProgress: 540
+            },
+            {
+                title: 'Relaxamento — início da diástole',
+                text: 'Ventrículos relaxam (repolarização, onda T). As válvulas se fecham — começa a fase de enchimento (diástole).',
+                highlight: [],
+                ecgProgress: 1000
+            }
+        ];
+
+        let current = -1;
+        const stepTitle = document.getElementById('stepTitle');
+        const stepText = document.getElementById('stepText');
+        const ecgReveal = document.getElementById('ecgReveal');
+        const svgHeart = document.getElementById('svgHeart');
+
+        function clearHighlights() {
+            ['rightAtrium', 'leftAtrium', 'rightVentricle', 'leftVentricle', 'mitralValve', 'tricuspidValve', 'aorticValve', 'pulmonaryValve'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.classList.remove('active');
+                // reverse contraction
+                el.querySelectorAll('path, ellipse').forEach(p => { p.style.transform = 'scaleY(1)'; p.classList.remove('contract'); p.style.transition = 'transform 300ms ease-out'; });
+            })
+        }
+
+        function highlightParts(ids) {
+            clearHighlights();
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.classList.add('active');
+                el.querySelectorAll('path, ellipse').forEach(p => { p.style.transform = 'scaleY(0.78)'; p.style.transition = 'transform 400ms ease-in'; });
+            })
+        }
+
+        function setECG(progress) {
+            // progress is stroke-dashoffset value — smaller is more revealed
+            // compute based on path length
+            const path = ecgReveal;
+            const total = 1000; // matches CSS dasharray
+            const offset = Math.max(total - progress, 0);
+            path.style.strokeDashoffset = offset;
+        }
+
+        function goToStep(i) {
+            if (i < 0 || i >= steps.length) return;
+            current = i;
+            const s = steps[i];
+            stepTitle.textContent = s.title;
+            stepText.textContent = s.text;
+            highlightParts(s.highlight);
+            setECG(s.ecgProgress);
+        }
+
+        function nextStep() {
+            const next = Math.min(current + 1, steps.length - 1);
+            goToStep(next);
+        }
+        function prevStep() {
+            const prev = Math.max(current - 1, 0);
+            goToStep(prev);
+        }
+        function resetSteps() {
+            current = -1; stepTitle.textContent = 'Pressione "Iniciar"'; stepText.textContent = 'Explicação detalhada aparecerá aqui.'; clearHighlights(); setECG(0);
+        }
+
+        // Small interactive clicks on the SVG to show a tooltip / info
+        ['rightAtrium', 'leftAtrium', 'rightVentricle', 'leftVentricle', 'mitralValve', 'tricuspidValve', 'aorticValve', 'pulmonaryValve'].forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.addEventListener('click', () => {
+                const aria = el.getAttribute('aria-label') || id;
+                stepTitle.textContent = aria;
+                // simple explanation mapping
+                const map = {
+                    'Átrio direito': 'Recebe sangue venoso do corpo e envia para o ventrículo direito.',
+                    'Átrio esquerdo': 'Recebe sangue oxigenado dos pulmões e envia para o ventrículo esquerdo.',
+                    'Ventrículo direito': 'Bombear sangue para os pulmões (pequena circulação).',
+                    'Ventrículo esquerdo': 'Bombear sangue para o corpo (grande circulação).',
+                    'Válvula mitral': 'Válvula AV entre átrio esquerdo e ventrículo esquerdo.',
+                    'Válvula tricúspide': 'Válvula AV entre átrio direito e ventrículo direito.',
+                    'Válvula aórtica': 'Semilunar que separa ventrículo esquerdo da aorta.',
+                    'Válvula pulmonar': 'Semilunar que separa ventrículo direito da artéria pulmonar.'
+                };
+                stepText.textContent = map[aria] || 'Parte anatômica.';
+                highlightParts([id]);
+            })
+        })
+
+        // Small quiz handler
+        function answer(btn) {
+            const correct = btn.getAttribute('data-correct') === 'true';
+            if (correct) {
+                btn.classList.add('correct');
+                btn.textContent = btn.textContent + ' ✓ Correto';
+            } else {
+                btn.classList.add('wrong');
+                btn.textContent = btn.textContent + ' ✗ Errado';
+            }
+            // disable siblings
+            const parent = btn.parentNode;
+            parent.querySelectorAll('.option').forEach(o => o.disabled = true);
+        }
+
+        // Initial setup
+        resetSteps();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+ .quiz-item {
+     margin-bottom: 14px
+ }
+
+ .option {
+     display: block;
+     padding: 10px;
+     border-radius: 8px;
+     background: rgba(255, 255, 255, 0.02);
+     margin-top: 6px;
+     border: 1px solid rgba(255, 255, 255, 0.02);
+     cursor: pointer;
+     color: #fff
+ }
+
+ .option.correct {
+     border-color: var(--success);
+     background: rgba(46, 184, 114, 0.08)
+ }
+
+ .option.wrong {
+     border-color: #ef5454;
+     background: rgba(239, 84, 84, 0.06)
+ }
+
+ .quiz-actions {
+     display: flex;
+     gap: 8px;
+     align-items: center;
+     margin-top: 10px
+ }
+
+ .score {
+     font-weight: 700
+ }
