@@ -171,7 +171,7 @@ header .navbar {
 /* SLIDER END */
 
 .sobre-mim {
-    padding-top: 50px;
+    padding-top: 30px;
     margin-bottom: -20px;
 }
 
@@ -207,4 +207,20 @@ footer {
     padding: 20px;
     text-align: center;
     color: #6b7280;
+}
+
+.btn-quiz {
+    border: none;
+    background: transparent;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #f3f3f3;
+}
+
+.btn-quiz-submit {
+    background-color: #e4492b;
+}
+
+.btn-quiz-clean {
+    background-color: #6b7280;
 }
